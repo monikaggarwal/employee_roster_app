@@ -1,4 +1,3 @@
-
 const  fs = require('fs');
 
 function sampleData() {
@@ -8,8 +7,8 @@ function sampleData() {
 const empAge = [];
 const jobTitle = ["Executive", "Manager", "Consultant", "Analyst", "Trainee", "PM", "Tester", "Tech Analyst", "Dev Ops"];
 const dateOfJoining = [];
-const imageUrl = "https://example.com/placeholder-image.png"; 
-    for (let id = 1; id <= 15; id++) {
+const imageUrl = "profile_dummy_img.jpeg";
+    for (let id = 1; id <= 500; id++) {
         const ranName = empName[Math.floor(Math.random() * empName.length)];
         const ranContactNo = Math.floor(Math.random() * 10000000000).toString();
         const ranAddress = address[Math.floor(Math.random() * address.length)];

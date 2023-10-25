@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import EmployeeModal from "./Components/EmployeeModal"; // Import EmployeeModal
+import EmployeeModal from "./Components/EmployeeModal"; 
 
 function App() {
   const [employeeData, setEmployeeData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
-  const [selectedEmployee, setSelectedEmployee] = useState(null); // State to store selected employee
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const employeesPerPage = 10;
 
   useEffect(() => {
@@ -68,9 +68,9 @@ function App() {
         </thead>
         <tbody>
           {getPaginatedEmployees().map((employee) => (
-            <tr key={employee.id} onClick={() => openModal(employee)}> {/* Add onClick handler */}
+            <tr key={employee.id} onClick={() => openModal(employee)}>
               <td>{employee.id}</td>
-              <td>{employee.name}</td>
+              <td><img src={"/" + employee.empPhoto} alt={employee.name} height="30" width="30"></img>{employee.empName}</td>
               <td>{employee.contactNo}</td>
               <td>{employee.address}</td>
             </tr>
@@ -94,8 +94,6 @@ function App() {
           Next
         </button>
       </div>
-
-      {/* Render EmployeeModal if isModalOpen is true */}
       {isModalOpen && (
         <EmployeeModal employee={selectedEmployee} onClose={closeModal} />
       )}
