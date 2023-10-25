@@ -1,5 +1,5 @@
 import React from "react";
-import "./EmployeeModal.css";
+import "../EmployeeModal.css";
 
 const EmployeeModal = ({ employee, onClose }) => {
   return (
