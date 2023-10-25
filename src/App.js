@@ -3,24 +3,21 @@ import "./App.css";
 
 function App() {
   const [employeeData, setEmployeeData] = useState(null);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const employeesPerPage = 10;
 
   useEffect(() => {
-    fetch('/sample-data.json')
-    .then(response => {
+    fetch("/sample-data.json")
+      .then((response) => {
         if (response.ok) {
-          const contentType = response.headers.get('Content-Type');
-          
-          if (contentType && contentType.includes('application/json')) 
-          {
-            return response.json();
-          } 
+          const contentType = response.headers.get("Content-Type");
 
-          else 
-            return response.text();
+          if (contentType && contentType.includes("application/json")) {
+            return response.json();
+          } else return response.text();
         }
       })
-      .then(data => {
+      .then((data) => {
         if (Array.isArray(data)) {
           setEmployeeData(data);
         } else {
@@ -30,45 +27,60 @@ function App() {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleEmployeeClick = (employee) => {
-    setSelectedEmployee(employee);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
-  const handleCloseModal = () => {
-    setSelectedEmployee(null);
+  const getPaginatedEmployees = () => {
+    if (employeeData && employeeData.length > 0) {
+      const startIndex = (currentPage - 1) * employeesPerPage;
+      const endIndex = startIndex + employeesPerPage;
+      return employeeData.slice(startIndex, endIndex);
+    } else {
+      return [];
+    }
   };
 
   return (
     <div className="App">
       <h1>Infosys Ltd.</h1>
-      {<table>
+      <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Contact No</th>
             <th>Address</th>
-            <th>Age</th>
-            <th>Job Title</th>
-            <th>Date of Joining</th>
-            <th>Job Description</th>
           </tr>
         </thead>
         <tbody>
-          {employeeData?.map((employee) => (
+          {getPaginatedEmployees().map((employee) => (
             <tr key={employee.id}>
-              <td onClick={() => handleEmployeeClick(employee)}>
-                {employee.name}
-              </td>
+              <td>{employee.id}</td>
+              <td>{employee.name}</td>
               <td>{employee.contactNo}</td>
               <td>{employee.address}</td>
-              <td>{employee.age}</td>
-              <td>{employee.jobTitle}</td>
-              <td>{employee.dateOfJoining}</td>
-              <td>{employee.jobDescription}</td>
             </tr>
           ))}
         </tbody>
-      </table>}
+      </table>
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {Math.ceil((employeeData?.length || 0) / employeesPerPage)}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage * employeesPerPage >= (employeeData?.length || 0)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
