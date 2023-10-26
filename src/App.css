@@ -1,32 +1,77 @@
 table.rosterTable {
-    border-collapse: collapse;
-    width: 1024px;
-    margin: 20px auto;
-    border: 1px solid #000;
-  }
-  
-  table.rosterTable, .rosterTable th, .rosterTable td {
-    border: 1px solid #ddd;
-  }
-  
-  .rosterTable th, .rosterTable td {
-    padding: 15px;
-    text-align: left;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .search-container {
-    text-align: right;
-  }
-
-  .pagination {
-    text-align: right;
+  border-collapse: collapse;
+  width: 1024px;
+  margin: 20px auto;
+  border: 1px solid #000;
 }
   
-  @media (max-width: 768px) {
-    table.rosterTable {
-      font-size: 14px;
-    }
+table.rosterTable, .rosterTable th, .rosterTable td {
+  border: 1px solid #ddd;
+}
+
+.rosterTable th, .rosterTable td {
+  padding: 15px;
+  text-align: left;
+  cursor: pointer;
+  text-align: center;
+}
+
+.search-container {
+  text-align: right;
+}
+
+.pagination {
+  text-align: right;
+}
+
+button {
+  border-radius: 0px;
+  background: none;
+  padding: 3px 15px;
+  font-size: 24px;
+  border: 1px solid;
+  display: inline-block;
+  height: 40px;
+}
+
+input[type="text"] {
+  padding: 0px 15px;
+  height: 39px;
+  margin: 0px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 24px;
+  border: 1px solid;
+}
+
+.pagination span {
+  margin: 0px 24px;
+}
+img {
+  margin: 0px 12px;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .App {
+    margin: 10px;
   }
+  table.rosterTable {
+    font-size: 14px;
+    width: 100%;
+  }
+  button {
+    width: 90px;
+    height: 30px;
+    padding: 3px;
+    font-size: 14px;
+  }
+  input[type="text"] {
+    width: 150px;
+    height: 26px;
+    padding: 1px;
+    font-size: 14px;
+    margin-right: 3px;
+  }
+}
   
