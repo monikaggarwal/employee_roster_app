@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEmployees } from './redux/reducer';
 import EmployeeModal from "./Components/EmployeeModal";
 
 function App() {
-  const [employeeData, setEmployeeData] = useState(null);
+  const dispatch = useDispatch();
+  const employeeData = useSelector((state) => state.employeeData);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -11,6 +14,7 @@ function App() {
   const employeesPerPage = 10;
 
   useEffect(() => {
+    dispatch(fetchEmployees());
     fetch("/sample-data.json")
       .then((response) => {
         if (response.ok) {
@@ -23,13 +27,12 @@ function App() {
       })
       .then((data) => {
         if (Array.isArray(data)) {
-          setEmployeeData(data);
         } else {
           console.error("Data is not an array:", data);
         }
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [dispatch]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
